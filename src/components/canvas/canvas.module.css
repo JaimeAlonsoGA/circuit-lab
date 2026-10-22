@@ -1,0 +1,52 @@
+.wrap { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(ellipse at 50% 40%, var(--bg-2), var(--bg)); }
+.wrap[data-drop] { box-shadow: inset 0 0 0 3px var(--accent); }
+.svg { width: 100%; height: 100%; display: block; touch-action: none; user-select: none; cursor: grab; }
+.svg[data-dragging='pan'] { cursor: grabbing; }
+.svg[data-dragging='wire'] { cursor: crosshair; }
+.grid { transform-origin: 0 0; pointer-events: none; }
+.part { cursor: move; transition: filter .2s; }
+.part:hover { filter: brightness(1.08); }
+.selRect { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 5 4; animation: march 1s linear infinite; pointer-events: none; }
+.wires { }
+.wire { cursor: pointer; }
+.wireHit { fill: none; stroke: transparent; stroke-width: 12; }
+.wireShadow { fill: none; stroke: #0007; stroke-width: 5.5; transform: translateY(2px); pointer-events: none; }
+.wireBody { fill: none; stroke-width: 3.6; stroke-linecap: round; pointer-events: none; transition: stroke-width .15s; }
+.wire:hover .wireBody, .wire[data-selected] .wireBody { stroke-width: 5; }
+.wire[data-selected] .wireShadow { stroke: var(--accent); stroke-opacity: .6; stroke-width: 9; transform: none; }
+.wire[data-hl] .wireShadow { stroke: #fff; stroke-opacity: .35; stroke-width: 9; transform: none; }
+.wireLive { fill: none; stroke: #fff; stroke-width: 7; stroke-linecap: round; pointer-events: none; filter: blur(2px); }
+.flow { fill: none; stroke: #fffbe0; stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 2 26; animation: flow linear infinite; pointer-events: none; filter: drop-shadow(0 0 3px #ffe066); }
+.ghostWire { fill: none; stroke: var(--accent); stroke-width: 3; stroke-dasharray: 6 5; pointer-events: none; animation: march .6s linear infinite; }
+.pin { fill: #ffffff10; stroke: #ffffff55; stroke-width: 1; cursor: crosshair; transition: r .12s, fill .12s; }
+.pinSmall { fill: transparent; stroke: none; cursor: crosshair; }
+.pin:hover, .pinSmall:hover { fill: var(--accent); stroke: #fff; r: 6; }
+.pins[data-active] .pin { stroke: var(--accent); animation: pulsePin 1s ease-in-out infinite; }
+.pins[data-active] .pinSmall { fill: #4cc9f022; }
+.pin[data-live='pos'] { stroke: #ff6b81; }
+.pin[data-live='neg'] { stroke: #6bb5ff; }
+.burnFx { }
+.flash { fill: #fff3b0; animation: flash .5s ease-out forwards; }
+.spark { stroke: #ffd166; stroke-width: 2; stroke-linecap: round; animation: spark .45s ease-out forwards; opacity: 0; }
+.puff { fill: #555a; animation: puff 1.8s ease-out forwards; opacity: 0; }
+.wisp { fill: #8888; animation: wisp 2.4s ease-out infinite; opacity: 0; }
+.empty { pointer-events: none; }
+.empty text { fill: var(--muted); font-size: 15px; letter-spacing: .04em; }
+.emptyRing { fill: none; stroke: var(--muted); stroke-opacity: .5; stroke-width: 2; stroke-dasharray: 8 8; animation: spin 18s linear infinite; transform-box: fill-box; transform-origin: center; }
+.emptyArrow { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; animation: bob 1.4s ease-in-out infinite; }
+.tip { position: fixed; z-index: 50; pointer-events: none; background: #0d1020ee; border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; font: 12px var(--font-geist-mono), monospace; display: flex; gap: 8px; color: var(--fg); box-shadow: 0 6px 20px #0008; }
+.tip span { color: var(--accent); }
+.zoom { position: absolute; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 4px; z-index: 5; }
+.zoom button { width: 44px; height: 32px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--fg); font-size: 13px; cursor: pointer; }
+.zoom button:hover { border-color: var(--accent); }
+@keyframes flow { to { stroke-dashoffset: -28; } }
+@keyframes march { to { stroke-dashoffset: -18; } }
+@keyframes pulsePin { 50% { stroke-width: 3; } }
+@keyframes flash { from { opacity: .9; transform: scale(.3); } to { opacity: 0; transform: scale(1.6); } }
+@keyframes spark { 0% { opacity: 1; transform: scale(.4); } 100% { opacity: 0; transform: scale(1.5); } }
+@keyframes puff { 0% { opacity: .8; transform: translateY(0) scale(.5); } 100% { opacity: 0; transform: translateY(-60px) scale(2); } }
+@keyframes wisp { 0% { opacity: .6; transform: translateY(0) scale(.6); } 100% { opacity: 0; transform: translate(6px, -40px) scale(1.8); } }
+@keyframes shake { 25% { transform: translate(2px, -1px); } 75% { transform: translate(-2px, 1px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes bob { 50% { transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .flow, .selRect, .ghostWire, .emptyRing, .emptyArrow, .wisp { animation: none; } }

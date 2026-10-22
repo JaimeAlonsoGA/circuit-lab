@@ -1,0 +1,20 @@
+.root { transform-origin: 50% 90%; }
+.root[data-mood='idle'] { animation: bob 3s ease-in-out infinite; }
+.root[data-mood='happy'] { animation: hop .5s cubic-bezier(.3, 1.6, .5, 1) 3; }
+.root[data-mood='scared'] { animation: shake .12s linear 10; }
+.root[data-mood='sleepy'] { animation: bob 5s ease-in-out infinite; filter: saturate(.3) brightness(.8); }
+.root[data-mood='talk'] { animation: bob 1.2s ease-in-out infinite; }
+.eye { transform-box: fill-box; transform-origin: center; animation: blink 4.5s infinite; }
+.root[data-mood='sleepy'] .eye { transform: scaleY(.15); animation: none; }
+.glow { transition: opacity .4s, fill .4s; }
+.spark { opacity: 0; }
+.root[data-mood='happy'] .spark { animation: spark .6s ease-out 3; }
+.zz { opacity: 0; }
+.root[data-mood='sleepy'] .zz { animation: zz 2.4s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-5px); } }
+@keyframes hop { 40% { transform: translateY(-16px) scale(1.05, .95); } }
+@keyframes shake { 25% { transform: translateX(-3px) rotate(-4deg); } 75% { transform: translateX(3px) rotate(4deg); } }
+@keyframes blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.1); } }
+@keyframes spark { 0% { opacity: 1; transform: scale(.4); } 100% { opacity: 0; transform: scale(1.5); } }
+@keyframes zz { 0% { opacity: 0; transform: translate(0, 0); } 50% { opacity: 1; } 100% { opacity: 0; transform: translate(8px, -14px); } }
+@media (prefers-reduced-motion: reduce) { .root, .eye, .spark, .zz { animation: none !important; } }

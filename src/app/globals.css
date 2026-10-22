@@ -1,0 +1,40 @@
+:root {
+  --bg: #0b0e1a;
+  --bg-2: #141a2e;
+  --panel: #151a2bf2;
+  --panel-2: #1c2238;
+  --line: #2a3150;
+  --fg: #e8ecf8;
+  --muted: #8b93b3;
+  --accent: #4cc9f0;
+  --accent-2: #f72585;
+  --ok: #22c55e;
+  --warn: #ffb020;
+  --danger: #ff4d6d;
+  --grid: #2a3254;
+  --radius: 14px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; overflow: hidden; background: var(--bg); color: var(--fg); font-family: var(--font-geist-sans), system-ui, sans-serif; }
+button { font: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); border: 0; }
+
+/* part animation classes (used inside SVG) */
+.glow { transition: opacity .12s; mix-blend-mode: screen; }
+.trans { transition: all .18s cubic-bezier(.3,1.5,.6,1); }
+.servo-horn { transition: transform .35s cubic-bezier(.3,1.2,.5,1); }
+.knob { transition: transform .05s; }
+.pulse { animation: pulse .5s ease-in-out infinite alternate; }
+.waves path { animation: wave .5s ease-out infinite; opacity: 0; }
+.buzz { animation: buzz .06s linear infinite; }
+.vibrate { animation: vib .05s linear infinite; }
+.eq { animation: eq .4s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: bottom; }
+.shine { animation: pulse 3s ease-in-out infinite alternate; }
+@keyframes pulse { from { opacity: .2; } }
+@keyframes wave { 0% { opacity: .9; transform: translateX(0); } 100% { opacity: 0; transform: translateX(10px); } }
+@keyframes buzz { 50% { transform: translate(.6px, -.4px); } }
+@keyframes vib { 50% { transform: scale(1.04); } }
+@keyframes eq { to { transform: scaleY(.3); } }
+@media (prefers-reduced-motion: reduce) { .buzz, .vibrate, .eq, .waves path, .pulse { animation: none; } }
